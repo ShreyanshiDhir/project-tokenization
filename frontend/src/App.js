@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Login from "./components/auth/Login";
 import Navbar from "./components/layout/Navbar";
+import Footer from "./components/layout/Footer";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
 import Register from "./components/auth/Register";
 import Dashboard from "./components/layout/Dashboard";
@@ -30,6 +31,7 @@ const App = () => {
 						path='/dashboard'
 						component={Dashboard}
 					/>
+				<Footer/>
 				</Switch>
 			</div>
 		</Router>
