@@ -13,8 +13,7 @@ import { useDispatch } from "react-redux";
 const App = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
-		if (localStorage.getItem("token"))
-		{
+		if (localStorage.getItem("token")) {
 			setAuthToken(localStorage.getItem("token"));
 			dispatch(loadUser());
 		}
@@ -31,8 +30,8 @@ const App = () => {
 						path='/dashboard'
 						component={Dashboard}
 					/>
-				<Footer/>
 				</Switch>
+				<Footer />
 			</div>
 		</Router>
 	);

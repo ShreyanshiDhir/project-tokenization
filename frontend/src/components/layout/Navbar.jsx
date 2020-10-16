@@ -3,7 +3,8 @@ import { AppBar, Toolbar, Box, Container } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { Typography } from "@material-ui/core";
 import { makeStyles, ThemeProvider } from "@material-ui/core";
-
+import { shallowEqual, useSelector,useDispatch } from "react-redux";
+import {logout} from '../../store/auth'
 //material theme
 import { MUItheme } from "../../theme";
 
@@ -16,11 +17,19 @@ import { NavbarLink } from "./NavbarLink";
 
 
 //Styles
-import NavbarStyles from "./NavbarStyles";
+import NavbarStyles from "./NavbarStyles.jsx";
 const useStyles = makeStyles(NavbarStyles);
 
 const Navbar = (props) => {
 	const classes = useStyles();
+	const dispatch = useDispatch();
+	const { isAuthenticated, user } = useSelector(
+		(state) => ({
+			isAuthenticated: state.auth.isAuthenticated,
+			user: state.auth.user,
+		}),
+		shallowEqual
+	);
 	return (
 		<ThemeProvider theme={MUItheme}>
 			<div>
@@ -49,8 +58,17 @@ const Navbar = (props) => {
 									</div>
 									{/* On Desktop */}
 									<Box display="flex" flexDirection="row" className={classes.desktopNav}>
+										{isAuthenticated ? (<>
+											<NavbarLink to="/dashboard" text="Dashboard" />
+											<Link className={classes.links} onClick={() => dispatch(logout())}>
+											<Typography className={classes.navLinkText}>Logout</Typography>
+											</Link>
+										</>) : 
+										(
+										<>
 										<NavbarLink to="/login" text="Login" />
-										<NavbarLink to="/register" text="Register" />
+										<NavbarLink to="/register" text="Register" /></>
+										)}
 									</Box>
 									{/* On Mobile Devices */}
 									<Box className={classes.mobileNav}>
