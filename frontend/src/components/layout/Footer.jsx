@@ -24,16 +24,13 @@ const Footer = () => {
 		<ThemeProvider theme={MUItheme}>
 			<div
 				style={{
-					position: "fixed",
 					bottom: "0",
-					width: "100%",
 					backgroundColor: "#22316C",
 				}}
 			>
 				<Box display='flex' flexDirection='column'>
 					<Grid
 						container
-						spacing={3}
 						direction='row'
 						justify='space-evenly'
 						alignItems='flex-start'
