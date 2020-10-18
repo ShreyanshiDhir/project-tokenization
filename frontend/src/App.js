@@ -4,7 +4,7 @@ import Login from "./components/auth/Login";
 import Navbar from "./components/layout/Navbar";
 import Footer from "./components/layout/Footer";
 import { Switch, Route, BrowserRouter as Router } from "react-router-dom";
-import Register from "./components/auth/Register";
+import Register2 from "./components/auth/Register2";
 import Dashboard from "./components/layout/Dashboard";
 import PrivateRoute from "./components/routing/PrivateRoute";
 import setAuthToken from "./utils/setAuthToken";
@@ -24,7 +24,7 @@ const App = () => {
 				<Navbar />
 				<Switch>
 					<Route exact path='/login' component={Login} />
-					<Route exact path='/register' component={Register} />
+					<Route exact path='/register' component={Register2} />
 					<PrivateRoute
 						exact
 						path='/dashboard'
