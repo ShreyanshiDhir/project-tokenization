@@ -3,6 +3,8 @@ const router = express.Router();
 const config = require("config");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const recoverPersonalSignature =  require('eth-sig-util').recoverPersonalSignature;
+const bufferToHex = require('ethereumjs-util').bufferToHex;
 const { body, validationResult } = require("express-validator");
 const auth = require("../middleware/auth");
 //User Model
@@ -29,37 +31,43 @@ router.get("/", auth, async (req, res) => {
 
 router.post(
 	"/",
-	[body("email").isEmail(), body("password").isLength({ min: 5 })],
 	async (req, res) => {
-		const errors = validationResult(req);
-		if (!errors.isEmpty()) {
-			return res.status(400).json({ errors: errors.array() });
-		}
-		const { email, password } = req.body;
+		const { publicAddress, signature } = req.body;
+		if (!signature || !publicAddress)
+    	return res
+			.status(400)
+			.send({ error: "Request should have signature and publicAddress" });
 		try {
-			let user = await User.findOne({ email });
+			let user = await User.findOne({ publicAddress });
 			if (!user) {
-				return res.status(400).json({
+				return res.status(401).json({
 					errors: [
 						{
-							msg: "Invalid credentials",
+							msg: "No such user",
 						},
 					],
 				});
 			}
-			const isMatch = await bcrypt.compare(password, user.password);
-			if (!isMatch) {
-				return res.status(400).json({
-					errors: [
-						{
-							msg: "Invalid credentials",
-						},
-					],
-				});
-			}
+		const msg = `Nonce : ${user.nonce}`;
+		const msgBufferHex = bufferToHex(Buffer.from(msg, 'utf8'));
+        const address = recoverPersonalSignature({
+          data: msgBufferHex,
+          sig: signature,
+		});
+		console.log(address)
+		if (address.toLowerCase() === publicAddress.toLowerCase()) {
+			user = user;
+		}
+		else {
+			console.log("Signature verification failed");
+			user =null;
+			return res.status(401).send({ error: 'Signature verification failed' });
+			
+		}
 			const payload = {
 				user: {
 					id: user.id,
+					publicAddress
 				},
 			};
 			jwt.sign(

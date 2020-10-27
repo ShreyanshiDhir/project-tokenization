@@ -1,16 +1,17 @@
 const express = require('express');
 const app = express();
 const connectDB = require('./config/db');
-const morgan = require("morgan");
+// const morgan = require("morgan");
 connectDB();
 // Init Middleware
 app.use(express.json({ extended: false }));
-//Dev Logging Middleware
-if (process.env.NODE_ENV === "development") {
-	app.use(morgan("dev"));
-  }
+// //Dev Logging Middleware
+// if (process.env.NODE_ENV === "development") {
+// 	app.use(morgan("dev"));
+//   }
+  app.use('/api/user',require('./routes/user'))
 app.use('/api/auth',require('./routes/auth'))
-app.use('/api/user',require('./routes/user'))
+
 app.get('/api/',(req,res)=>{
 	res.send('hello world');
 })

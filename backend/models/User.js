@@ -1,18 +1,25 @@
 const mongoose = require("mongoose");
 const UserSchema = new mongoose.Schema({
+	nonce: {
+		type: Number,
+		required : true,
+		default : () => Math.floor(Math.random() * 1000000) //initialize it with a random nonce
+	},
 	name: {
 		type: String,
 		required: true,
+		default : "Pranav"
 	},
-	email: {
+	publicAddress: {
 		type: String,
 		required: true,
-		unique: true,
+		unique : true
 	},
-	password: {
-		type: String,
-		required: true,
-	},
+	// email: {
+	// 	type: String,
+	// 	required: true,
+	// 	unique: true,
+	// },
 });
 
-module.exports = User = mongoose.model('user',UserSchema);
+module.exports = User = mongoose.model("user", UserSchema);
