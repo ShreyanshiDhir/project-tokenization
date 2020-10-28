@@ -78,10 +78,11 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
 	try {
 		let user = new User({
+			name : req.body.fname,
 			publicAddress: req.body.publicAddress,
 		});
 		await user.save();
-		res.json(user);
+		res.json({user});
 	} catch (err) {
 		console.log(err.message);
 		res.status(400).send("server error");
