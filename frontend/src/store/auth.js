@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import API from "../api/api";
 import setAuthToken from "../utils/setAuthToken";
 import isEmpty from "../utils/isEmpty";
-import Web3 from 'web3';
+import Web3 from "web3";
 const initialState = {
 	token: localStorage.getItem("token"),
 	isAuthenticated: null,
@@ -64,9 +64,9 @@ export const loadUser = () => async (dispatch) => {
 };
 
 //register a new user
-export const registerUser = ({ fname,lname, email},web3,history) => async (dispatch) => {
-
-	
+export const registerUser = ({ name, email }, web3, history) => async (
+	dispatch
+) => {
 	try {
 		dispatch(setLoading(true));
 		if (!web3) {
@@ -87,19 +87,19 @@ export const registerUser = ({ fname,lname, email},web3,history) => async (dispa
 			return;
 		}
 		const publicAddress = coinbase.toLowerCase();
-		const body = JSON.stringify({ fname,lname, email,publicAddress});
+		const body = JSON.stringify({ name, email, publicAddress });
 		console.log(publicAddress);
 		const res = await API.post("/api/user", body);
-		console.log(res.data)
+		console.log(res.data);
 		if (res.data.user) {
 			console.log(res.data);
-			history.push('/login');
+			history.push("/login");
 			dispatch(setLoading(false));
 		}
 	} catch (err) {
 		const errors = err.response.data.errors;
 		//@todo : HERE DO ERROR HANDLING FOR DOUBLE REGISTRATION
-		
+
 		console.log(errors);
 		dispatch(setError()); // this makes loading : false
 	}
@@ -124,7 +124,7 @@ export const registerUser = ({ fname,lname, email},web3,history) => async (dispa
 // 	}
 // };
 //
-export const metaMaskLogin = (web3,history) => async (dispatch) => {
+export const metaMaskLogin = (web3, history) => async (dispatch) => {
 	try {
 		if (!web3) {
 			try {
@@ -154,23 +154,23 @@ export const metaMaskLogin = (web3,history) => async (dispatch) => {
 		let user = res.data.user;
 		//handleSignup starts
 		if (!user) {
-			history.push('/register');
+			history.push("/register");
 		} else {
-		console.log(user);
-		//handleSignature starts
-		const signature = await web3.eth.personal.sign(
-			`Nonce : ${user.nonce}`,
-			publicAddress
-		);
-		console.log(signature);
-		//handleAuthenticate starts
-		const body = JSON.stringify({ publicAddress, signature });
-		res = await API.post("/api/auth/", body);
-		const { token } = res.data;
-		console.log(token);
-		setAuthToken(token);
-		dispatch(loadUser());
-		dispatch(setToken(token));
+			console.log(user);
+			//handleSignature starts
+			const signature = await web3.eth.personal.sign(
+				`Nonce : ${user.nonce}`,
+				publicAddress
+			);
+			console.log(signature);
+			//handleAuthenticate starts
+			const body = JSON.stringify({ publicAddress, signature });
+			res = await API.post("/api/auth/", body);
+			const { token } = res.data;
+			console.log(token);
+			setAuthToken(token);
+			dispatch(loadUser());
+			dispatch(setToken(token));
 		}
 	} catch (err) {
 		const errors = err.response.data.error;

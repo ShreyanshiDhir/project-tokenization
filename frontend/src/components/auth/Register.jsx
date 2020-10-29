@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
-import {registerUser} from '../../store/auth'
+import { registerUser } from "../../store/auth";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { MUItheme } from "../../theme";
@@ -9,13 +9,12 @@ import { TextField, Box, Paper, ThemeProvider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import laptop from "../../assets/images/laptop.png";
-import Web3 from 'web3';
+import Web3 from "web3";
 const initialValues = {
-	fname: "",
-	lname: "",
+	name: "",
 	email: "",
 };
-let web3; 
+let web3;
 const Register = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
@@ -32,7 +31,7 @@ const Register = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(registerUser(values,web3,history))
+		dispatch(registerUser(values, web3, history));
 	};
 
 	useEffect(() => {
@@ -81,29 +80,15 @@ const Register = () => {
 								style={{ width: "22rem", height: "15rem" }}
 							/>
 							<TextField
-								label='First Name'
+								label='Name'
 								size='small'
 								variant='outlined'
-								name='fname'
+								name='name'
 								onChange={handleInputChange}
-								value={values.fname}
+								value={values.name}
 								style={{
 									marginBottom: "1.2rem",
 									marginTop: "2rem",
-									backgroundColor: "white",
-									borderRadius: "5px",
-								}}
-							/>
-
-							<TextField
-								label='Last Name'
-								variant='outlined'
-								size='small'
-								name='lname'
-								value={values.lname}
-								onChange={handleInputChange}
-								style={{
-									marginBottom: "1.2rem",
 									backgroundColor: "white",
 									borderRadius: "5px",
 								}}

@@ -24,9 +24,14 @@ router.get("/", async (req, res) => {
 	}
 });
 
+//@route	POST api/user
+//@desc		Create a new user
+//@access	PUBLIC
 router.post("/", async (req, res) => {
 	try {
-		let user = await User.findOne({ publicAddress : req.body.publicAddress });
+		let user = await User.findOne({
+			publicAddress: req.body.publicAddress,
+		});
 		if (user) {
 			return res.status(400).json({
 				errors: [
@@ -37,11 +42,12 @@ router.post("/", async (req, res) => {
 			});
 		}
 		user = new User({
-			name : req.body.fname,
+			name: req.body.name,
+			email: req.body.email,
 			publicAddress: req.body.publicAddress,
 		});
 		await user.save();
-		res.json({user});
+		res.json({ user });
 	} catch (err) {
 		console.log(err.message);
 		res.status(400).send("server error");
