@@ -1,16 +1,19 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import "./Login.css";
 import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import {login, metaMaskLogin} from '../../store/auth' 
+import { login, metaMaskLogin } from "../../store/auth";
 import { useHistory } from "react-router-dom";
-import Web3 from 'web3';
+import Web3 from "web3";
 import Axios from "axios";
 import API from "../../api/api";
 let web3; // Will hold the web3 instance
 const Login = (props) => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const {isAuthenticated} = useSelector(state => ({isAuthenticated : state.auth.isAuthenticated}),shallowEqual);
+	const { isAuthenticated } = useSelector(
+		(state) => ({ isAuthenticated: state.auth.isAuthenticated }),
+		shallowEqual
+	);
 	// const [formData, setFormData] = useState({
 	// 	email: "",
 	// 	password: "",
@@ -18,45 +21,20 @@ const Login = (props) => {
 	// const onChange = (e) =>
 	// 	setFormData({ ...formData, [e.target.name]: e.target.value });
 	// const { email, password } = formData;
-	const onSubmit = async(e) => {
+	const onSubmit = async (e) => {
 		e.preventDefault();
-		dispatch(metaMaskLogin(web3,history));
-		
-	//
-	
-	}
+		dispatch(metaMaskLogin(web3, history));
+
+		//
+	};
 
 	useEffect(() => {
-		if(isAuthenticated)
-			history.push('/dashboard');
-	}, [isAuthenticated,history]);
+		if (isAuthenticated) history.push("/dashboard");
+	}, [isAuthenticated, history]);
 	return (
 		<div className='box'>
 			<h1 align='center'>Login</h1>
-			<form role='form' onSubmit={e=>onSubmit(e)}>
-				{/* <div className='inputBox'>
-					<input
-						type='text'
-						name='email'
-						value={email}
-						onChange={onChange}
-						autoComplete='off'
-						required
-					/>
-					<label>Email</label>
-				</div>
-				<div className='inputBox'>
-					<input
-						type='password'
-						name='password'
-						value={password}
-						onChange={onChange}
-						autoComplete='off'
-						required
-					/>
-					<label>Password</label>
-				</div> */}
-
+			<form role='form' onSubmit={(e) => onSubmit(e)}>
 				<input type='submit' name='login' value='Login' />
 			</form>
 		</div>

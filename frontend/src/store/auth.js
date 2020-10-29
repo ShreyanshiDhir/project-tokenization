@@ -97,7 +97,9 @@ export const registerUser = ({ fname,lname, email},web3,history) => async (dispa
 			dispatch(setLoading(false));
 		}
 	} catch (err) {
-		const errors = err.response.data.error;
+		const errors = err.response.data.errors;
+		//@todo : HERE DO ERROR HANDLING FOR DOUBLE REGISTRATION
+		
 		console.log(errors);
 		dispatch(setError()); // this makes loading : false
 	}
@@ -152,19 +154,9 @@ export const metaMaskLogin = (web3,history) => async (dispatch) => {
 		let user = res.data.user;
 		//handleSignup starts
 		if (!user) {
-			history.push('/register')
-			const body = JSON.stringify({
-				publicAddress,
-			});
-			user = await API.post("/api/user", body);
-		}
+			history.push('/register');
+		} else {
 		console.log(user);
-		res = await API.get("/api/user", {
-			params: {
-				publicAddress,
-			},
-		});
-		user = res.data.user;
 		//handleSignature starts
 		const signature = await web3.eth.personal.sign(
 			`Nonce : ${user.nonce}`,
@@ -179,6 +171,7 @@ export const metaMaskLogin = (web3,history) => async (dispatch) => {
 		setAuthToken(token);
 		dispatch(loadUser());
 		dispatch(setToken(token));
+		}
 	} catch (err) {
 		const errors = err.response.data.error;
 		console.log(errors);
