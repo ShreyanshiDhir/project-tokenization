@@ -10,7 +10,7 @@ import PrivateRoute from "./components/routing/PrivateRoute";
 import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./store/auth";
 import { useDispatch } from "react-redux";
-import { NewToken } from "./components/property/NewToken";
+import  NewToken  from "./components/property/NewToken";
 const App = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
