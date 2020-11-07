@@ -60,6 +60,7 @@ const Navbar = (props) => {
 									<Box display="flex" flexDirection="row" className={classes.desktopNav}>
 										{isAuthenticated ? (<>
 											<NavbarLink to="/dashboard" text="Dashboard" />
+											<NavbarLink to="/new-token" text="Create new Token" />
 											<Link className={classes.links} onClick={() => dispatch(logout())}>
 											<Typography className={classes.navLinkText}>Logout</Typography>
 											</Link>
