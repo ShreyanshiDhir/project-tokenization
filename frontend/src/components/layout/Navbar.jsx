@@ -33,7 +33,7 @@ const Navbar = (props) => {
 	return (
 		<ThemeProvider theme={MUItheme}>
 			<div>
-				<AppBar position="sticky" style={{ boxShadow: "none" }}>
+				<AppBar position="sticky" style={{ boxShadow: "none"}}>
 					<div style={{ position: "relative", top: "0", left: "0", zIndex: "200" }}>
 						<Container>
 							<Toolbar>

@@ -1,46 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React from 'react'
 import "./Login.css";
-import { shallowEqual, useDispatch, useSelector } from "react-redux";
-import { login, metaMaskLogin } from "../../store/auth";
-import { useHistory } from "react-router-dom";
-import Web3 from "web3";
-import Axios from "axios";
-import API from "../../api/api";
-let web3; // Will hold the web3 instance
-const Login = (props) => {
-	const dispatch = useDispatch();
-	const history = useHistory();
-	const { isAuthenticated } = useSelector(
-		(state) => ({ isAuthenticated: state.auth.isAuthenticated }),
-		shallowEqual
-	);
-	// const [formData, setFormData] = useState({
-	// 	email: "",
-	// 	password: "",
-	// });
-	// const onChange = (e) =>
-	// 	setFormData({ ...formData, [e.target.name]: e.target.value });
-	// const { email, password } = formData;
-	const onSubmit = async (e) => {
-		e.preventDefault();
-		dispatch(metaMaskLogin(web3, history));
+import Grid from '@material-ui/core/Grid';
 
-		//
-	};
-
-	useEffect(() => {
-		if (isAuthenticated) history.push("/dashboard");
-	}, [isAuthenticated, history]);
+function Login() {
 	return (
-		<div className='box'>
-			<h1 align='center'>Login</h1>
-			<form role='form' onSubmit={(e) => onSubmit(e)}>
-				<input type='submit' name='login' value='Login' />
-			</form>
+		<div id="mainBox">
+
+			<div id="wrapper">
+				<div id="heading">
+					<h1>Welcome Back</h1>
+				</div>
+				<div id="signin">
+					<form action="">
+						<div class="form-group">
+							<input type="submit" value="Log In"></input>
+						</div>
+					</form>
+				</div>
+			</div>
+			
 		</div>
-	);
-};
+	)
+}
 
-Login.propTypes = {};
-
-export default Login;
+export default Login

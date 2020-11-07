@@ -39,14 +39,14 @@ const Footer = () => {
 							marginTop: "2rem",
 						}}
 					>
-						<Grid item xs={11} sm={5} md={2}>
+						<Grid item sm={5} md={2}>
 							<h3>Logo</h3>
 							<img
 								style={{ height: "7rem", width: "5rem" }}
 								src={logo}
 							/>
 						</Grid>
-						<Grid item xs={11} sm={5} md={2}>
+						<Grid item sm={5} md={2}>
 							<h3>Company</h3>
 							<ul
 								className={classes.root}
@@ -62,7 +62,7 @@ const Footer = () => {
 								</li>
 							</ul>
 						</Grid>
-						<Grid item xs={11} sm={5} md={2}>
+						<Grid item sm={5} md={2}>
 							<h3>Resources</h3>
 							<ul
 								className={classes.root}
@@ -84,7 +84,7 @@ const Footer = () => {
 								</li>
 							</ul>
 						</Grid>
-						<Grid item xs={11} sm={5} md={2}>
+						<Grid item sm={5} md={2}>
 							<h3>Socials</h3>
 							<ul
 								className={classes.root}
