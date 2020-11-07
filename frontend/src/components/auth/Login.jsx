@@ -1,8 +1,27 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import "./Login.css";
+import { shallowEqual, useDispatch, useSelector } from "react-redux";
+import { login, metaMaskLogin } from "../../store/auth";
+import { useHistory } from "react-router-dom";
+import Web3 from "web3";
+import Axios from "axios";
+import API from "../../api/api";
 import Grid from '@material-ui/core/Grid';
-
-function Login() {
+let web3; // Will hold the web3 instance
+const Login = (props) => {
+	const dispatch = useDispatch();
+	const history = useHistory();
+	const { isAuthenticated } = useSelector(
+		(state) => ({ isAuthenticated: state.auth.isAuthenticated }),
+		shallowEqual
+	);
+	const onSubmit = async (e) => {
+		e.preventDefault();
+		dispatch(metaMaskLogin(web3, history));
+	};
+	useEffect(() => {
+		if (isAuthenticated) history.push("/dashboard");
+	}, [isAuthenticated, history]);
 	return (
 		<div id="mainBox">
 
@@ -11,9 +30,9 @@ function Login() {
 					<h1>Welcome Back</h1>
 				</div>
 				<div id="signin">
-					<form action="">
+				<form role='form' onSubmit={(e) => onSubmit(e)}>
 						<div class="form-group">
-							<input type="submit" value="Log In"></input>
+							<input type="submit" name='login' value="Log In" />
 						</div>
 					</form>
 				</div>

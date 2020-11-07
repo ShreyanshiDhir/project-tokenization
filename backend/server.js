@@ -9,8 +9,9 @@ app.use(express.json({ extended: false }));
 // if (process.env.NODE_ENV === "development") {
 // 	app.use(morgan("dev"));
 //   }
-  app.use('/api/user',require('./routes/user'))
+app.use('/api/user',require('./routes/user'))
 app.use('/api/auth',require('./routes/auth'))
+app.use('/api/property',require('./routes/property'))
 
 app.get('/api/',(req,res)=>{
 	res.send('hello world');
