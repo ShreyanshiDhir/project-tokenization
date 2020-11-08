@@ -85,7 +85,7 @@ const NewToken = () => {
 								<div style={{width:"80%"}}>
 									<h1 mt="1rem">
 										<span style={{ color: "#003F87", fontSize:"3rem", fontWeight:"bold" }}>
-											Come join us!
+											Create New Token
 										</span>{" "}
 									</h1>
 									

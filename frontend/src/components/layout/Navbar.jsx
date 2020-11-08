@@ -61,9 +61,10 @@ const Navbar = (props) => {
 										{isAuthenticated ? (<>
 											<NavbarLink to="/dashboard" text="Dashboard" />
 											<NavbarLink to="/new-token" text="Create new Token" />
-											<Link className={classes.links} onClick={() => dispatch(logout())}>
+											<div style={{position:"relative",marginRight:"1rem"}}><Link className={classes.links} onClick={() => dispatch(logout())}>
 											<Typography className={classes.navLinkText}>Logout</Typography>
 											</Link>
+											</div>
 										</>) : 
 										(
 										<>
