@@ -26,6 +26,7 @@ const Footer = () => {
 				style={{
 					bottom: "0",
 					backgroundColor: "#22316C",
+					marginTop:"5rem"
 				}}
 			>
 				<Box display='flex' flexDirection='column'>

@@ -26,7 +26,7 @@ function PropertyItem({name}) {
 
   return (
       <Link className={classes.link} to="/">
-        <Card className={classes.root}>
+        <Card className={classes.root} style={{boxShadow: " 0 30px 50px -14px rgba(0,0,0,0.25)"}}>
         <CardActionArea to="/">
             <CardMedia  
             component="img"
@@ -64,6 +64,15 @@ function PropertyItem({name}) {
             </Grid>
 
             
+            </CardContent>
+            <CardContent style={{backgroundColor:"#00cccc", height:"auto", color:"white", padding:"12px"}}>
+                
+                <Typography variant="caption"> 
+                    Token Price
+                </Typography>
+                <Typography variant="h5" style={{fontWeight:"bold"}} > 
+                    0.12 ETH
+                </Typography>
             </CardContent>
         </CardActionArea>
         {/* <CardActions>

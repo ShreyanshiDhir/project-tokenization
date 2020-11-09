@@ -8,7 +8,9 @@ import { MUItheme } from "../../theme";
 import { TextField, Box, Paper, ThemeProvider } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import laptop from "../../assets/images/laptop.png";
+import tokenization from "../../assets/images/tokeniztion.png";
+import bg from "../../assets/images/img_joinus-1.png";
+
 import Web3 from "web3";
 const initialValues = {
 	name: "",
@@ -43,6 +45,7 @@ const NewToken = () => {
 				justifyContent: "center",
 				marginTop: "2rem",
 				marginBottom: "2rem",
+				
 			}}
 		>
 			{
@@ -55,6 +58,9 @@ const NewToken = () => {
 						paddingLeft: "4rem",
 						borderRadius: "6px",
 						backgroundColor: "white",
+						// backgroundImage:`url(${bg})`
+						
+						
 					}}
 				>
 					<div
@@ -67,20 +73,22 @@ const NewToken = () => {
 					>
 						<ThemeProvider>
 							<Grid container spacing={3}>
-								<Grid item xs={12} sm={6}>
+								
+							<Grid item xs={12} sm={6}>
 									<img
-										src={laptop}
+										src={tokenization}
 										style={{
-											width: "25rem",
-											height: "17rem",
+											width: "28rem",
+											height: "25rem",
 											display:"flex",
 											alignItems:"center",
 											justifyContent:"center",
-											marginTop:"5rem"
+											marginTop:"1rem",
+											
 										}}
 									/>
 								</Grid>
-								
+
 								<Grid item xs={12} sm={6}>
 								<div style={{width:"80%"}}>
 									<h1 mt="1rem">
@@ -137,8 +145,8 @@ const NewToken = () => {
 										}}
 									/>
 
-									<Grid container spacing={3} >
-										<Grid item xs={12} sm={6}>
+									<Grid container spacing={2} >
+										<Grid item xs={12} sm={4}>
 											<TextField
 												label="Token Value"
 												variant="outlined"
@@ -154,7 +162,7 @@ const NewToken = () => {
 												}}
 											/>
 										</Grid>
-										<Grid item xs={12} sm={6}>
+										<Grid item xs={12} sm={4}>
 											<TextField
 												label="Total Tokens"
 												variant="outlined"
@@ -162,6 +170,23 @@ const NewToken = () => {
 												name="totalTokens"
 												onChange={handleInputChange}
 												value={values.totalTokens}
+												style={{
+													marginBottom: "1.2rem",
+													backgroundColor: "white",
+													borderRadius: "5px",
+													width: "100%",
+
+												}}
+											/>
+										</Grid>
+										<Grid item xs={12} sm={4}>
+											<TextField
+												label="Token Symbol"
+												variant="outlined"
+												size="small"
+												name="totalTokens"
+												onChange={handleInputChange}
+												value={values.tokenSymbol}
 												style={{
 													marginBottom: "1.2rem",
 													backgroundColor: "white",
@@ -205,6 +230,8 @@ const NewToken = () => {
 									</div>
 									</div>
 								</Grid>
+								
+
 								
 							</Grid>
 						</ThemeProvider>
