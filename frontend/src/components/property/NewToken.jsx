@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../store/auth";
+import { newToken } from "../../store/property";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { MUItheme } from "../../theme";
@@ -14,13 +15,18 @@ import bg from "../../assets/images/img_joinus-1.png";
 import Web3 from "web3";
 const initialValues = {
 	name: "",
-	email: "",
+	description: "",
+	image : "",
+	tokenValue : "",
+	initialSupply : "",
+	symbol : ""
+
 };
 let web3;
 const NewToken = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	
+
 	const [values, setValues] = useState(initialValues);
 	const handleInputChange = (e) => {
 		setValues({
@@ -31,10 +37,8 @@ const NewToken = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(registerUser(values, web3, history));
+		dispatch(newToken(values, web3, history));
 	};
-
-	
 
 	return (
 		<div
@@ -45,7 +49,6 @@ const NewToken = () => {
 				justifyContent: "center",
 				marginTop: "2rem",
 				marginBottom: "2rem",
-				
 			}}
 		>
 			{
@@ -58,9 +61,6 @@ const NewToken = () => {
 						paddingLeft: "4rem",
 						borderRadius: "6px",
 						backgroundColor: "white",
-						// backgroundImage:`url(${bg})`
-						
-						
 					}}
 				>
 					<div
@@ -73,166 +73,167 @@ const NewToken = () => {
 					>
 						<ThemeProvider>
 							<Grid container spacing={3}>
-								
-							<Grid item xs={12} sm={6}>
+								<Grid item xs={12} sm={6}>
 									<img
 										src={tokenization}
 										style={{
 											width: "28rem",
 											height: "25rem",
-											display:"flex",
-											alignItems:"center",
-											justifyContent:"center",
-											marginTop:"1rem",
-											
+											display: "flex",
+											alignItems: "center",
+											justifyContent: "center",
+											marginTop: "1rem",
 										}}
 									/>
 								</Grid>
 
 								<Grid item xs={12} sm={6}>
-								<div style={{width:"80%"}}>
-									<h1 mt="1rem">
-										<span style={{ color: "#003F87", fontSize:"3rem", fontWeight:"bold" }}>
-											Create New Token
-										</span>{" "}
-									</h1>
-									
-
-								
-									<TextField
-										label="Name"
-										size="small"
-										variant="outlined"
-										name="name"
-										onChange={handleInputChange}
-										value={values.name}
-										style={{
-											marginBottom: "1.2rem",
-											marginTop: "0.4rem",
-											backgroundColor: "white",
-											borderRadius: "5px",
-											width: "100%",
-										}}
-									/>
-
-									<TextField
-										label="Description"
-										variant="outlined"
-										size="small"
-										name="description"
-										onChange={handleInputChange}
-										value={values.description}
-										style={{
-											marginBottom: "1.2rem",
-											backgroundColor: "white",
-											borderRadius: "5px",
-											width: "100%",
-										}}
-									/>
-
-									<TextField
-										label="Image Url"
-										variant="outlined"
-										size="small"
-										name="image"
-										onChange={handleInputChange}
-										value={values.image}
-										style={{
-											marginBottom: "1.2rem",
-											backgroundColor: "white",
-											borderRadius: "5px",
-											width: "100%",
-										}}
-									/>
-
-									<Grid container spacing={2} >
-										<Grid item xs={12} sm={4}>
-											<TextField
-												label="Token Value"
-												variant="outlined"
-												size="small"
-												name="tokenValue"
-												onChange={handleInputChange}
-												value={values.totalValue}
+									<div style={{ width: "80%" }}>
+										<h1 mt='1rem'>
+											<span
 												style={{
-													marginBottom: "1.2rem",
-													backgroundColor: "white",
-													borderRadius: "5px",
-													width: "100%",
+													color: "#003F87",
+													fontSize: "3rem",
+													fontWeight: "bold",
 												}}
-											/>
-										</Grid>
-										<Grid item xs={12} sm={4}>
-											<TextField
-												label="Total Tokens"
-												variant="outlined"
-												size="small"
-												name="totalTokens"
-												onChange={handleInputChange}
-												value={values.totalTokens}
-												style={{
-													marginBottom: "1.2rem",
-													backgroundColor: "white",
-													borderRadius: "5px",
-													width: "100%",
+											>
+												Create New Token
+											</span>{" "}
+										</h1>
 
-												}}
-											/>
-										</Grid>
-										<Grid item xs={12} sm={4}>
-											<TextField
-												label="Token Symbol"
-												variant="outlined"
-												size="small"
-												name="totalTokens"
-												onChange={handleInputChange}
-												value={values.tokenSymbol}
-												style={{
-													marginBottom: "1.2rem",
-													backgroundColor: "white",
-													borderRadius: "5px",
-													width: "100%",
-
-												}}
-											/>
-										</Grid>
-									</Grid>
-
-									<div style={{ display: "flex" }}>
-										<Grid
-											container
+										<TextField
+											label='Name'
+											size='small'
+											variant='outlined'
+											name='name'
+											onChange={handleInputChange}
+											value={values.name}
 											style={{
+												marginBottom: "1.2rem",
+												marginTop: "0.4rem",
+												backgroundColor: "white",
+												borderRadius: "5px",
 												width: "100%",
-												justifyContent: "center",
-												marginBottom: "2rem",
 											}}
-										>
-											<Grid item xs={12} md={12}>
-												<Button
-													type="submit"
-													varient="outlined"
+										/>
+
+										<TextField
+											label='Description'
+											variant='outlined'
+											size='small'
+											name='description'
+											onChange={handleInputChange}
+											value={values.description}
+											style={{
+												marginBottom: "1.2rem",
+												backgroundColor: "white",
+												borderRadius: "5px",
+												width: "100%",
+											}}
+										/>
+
+										<TextField
+											label='Image Url'
+											variant='outlined'
+											size='small'
+											name='image'
+											onChange={handleInputChange}
+											value={values.image}
+											style={{
+												marginBottom: "1.2rem",
+												backgroundColor: "white",
+												borderRadius: "5px",
+												width: "100%",
+											}}
+										/>
+
+										<Grid container spacing={2}>
+											<Grid item xs={12} sm={4}>
+												<TextField
+													label='Token Value'
+													variant='outlined'
+													size='small'
+													name='tokenValue'
+													onChange={handleInputChange}
+													value={values.tokenValue}
 													style={{
+														marginBottom: "1.2rem",
 														backgroundColor:
-															"#00cccc",
-														color: "white",
-														opacity: "0.9",
-														marginTop: "0.4rem",
-														marginBottom: "1rem",
+															"white",
+														borderRadius: "5px",
 														width: "100%",
-														padding: "8px",
-														fontWeight:"bold"
 													}}
-												>
-													Submit
-												</Button>
+												/>
+											</Grid>
+											<Grid item xs={12} sm={4}>
+												<TextField
+													label='Total Tokens'
+													variant='outlined'
+													size='small'
+													name='initialSupply'
+													onChange={handleInputChange}
+													value={values.initialSupply}
+													style={{
+														marginBottom: "1.2rem",
+														backgroundColor:
+															"white",
+														borderRadius: "5px",
+														width: "100%",
+													}}
+												/>
+											</Grid>
+											<Grid item xs={12} sm={4}>
+												<TextField
+													label='Token Symbol'
+													variant='outlined'
+													size='small'
+													name='symbol'
+													onChange={handleInputChange}
+													value={values.symbol}
+													style={{
+														marginBottom: "1.2rem",
+														backgroundColor:
+															"white",
+														borderRadius: "5px",
+														width: "100%",
+													}}
+												/>
 											</Grid>
 										</Grid>
-									</div>
+
+										<div style={{ display: "flex" }}>
+											<Grid
+												container
+												style={{
+													width: "100%",
+													justifyContent: "center",
+													marginBottom: "2rem",
+												}}
+											>
+												<Grid item xs={12} md={12}>
+													<Button
+														type='submit'
+														varient='outlined'
+														style={{
+															backgroundColor:
+																"#00cccc",
+															color: "white",
+															opacity: "0.9",
+															marginTop: "0.4rem",
+															marginBottom:
+																"1rem",
+															width: "100%",
+															padding: "8px",
+															fontWeight: "bold",
+														}}
+													>
+														Submit
+													</Button>
+												</Grid>
+											</Grid>
+										</div>
 									</div>
 								</Grid>
-								
-
-								
 							</Grid>
 						</ThemeProvider>
 					</div>
