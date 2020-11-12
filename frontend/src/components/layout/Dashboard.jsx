@@ -1,7 +1,7 @@
 import React,{useEffect} from "react";
 import { useSelector,useDispatch } from "react-redux";
 import { loadAllProperties } from "../../store/property";
-import  PropertyItem  from "./PropertyItem";
+import  PropertyItem  from "../property/PropertyItem";
 import  UserInfo  from "./UserInfo";
 import {Grid, Typography} from '@material-ui/core';
 
