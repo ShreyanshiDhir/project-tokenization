@@ -1,4 +1,5 @@
 import React from 'react';
+import "./PropertyItem.css"
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -15,6 +16,11 @@ import { findNonSerializableValue } from '@reduxjs/toolkit';
 const useStyles = makeStyles({
   root: {
     maxWidth: 345,
+    "&:hover": {
+        transform: "scale(1.03)",
+        transitionTimingFunction: "ease"
+      },
+      transition:"0.3s"
   },
   link: {
       textDecoration: "none",
