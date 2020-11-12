@@ -39,8 +39,7 @@ export const loadAllProperties = () => async (dispatch) => {
 		console.log(res);
 		dispatch(setProperties(res.data.properties));
 	} catch (err) {
-		const errors = err.response.data.error;
-		console.log(errors);
+		console.log(err);
 		dispatch(setLoading(false));
 	}
 };
