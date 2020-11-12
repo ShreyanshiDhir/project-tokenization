@@ -133,6 +133,7 @@ export const metaMaskLogin = (web3, history) => async (dispatch) => {
 				// We don't know window.web3 version, so we use our own instance of Web3
 				// with the injected provider given by MetaMask
 				web3 = new Web3(window.ethereum);
+				console.log(web3.version);
 			} catch (error) {
 				window.alert("You need to allow MetaMask.");
 				return;

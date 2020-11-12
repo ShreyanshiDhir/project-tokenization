@@ -24,8 +24,8 @@ const Dashboard = () => {
 	}));
 	const dispatch = useDispatch();
 	useEffect(() => {
-		dispatch(loadAllProperties());
-	}, []);
+		if(!loading) dispatch(loadAllProperties());
+	}, [loading]);
 	
 	return (
 		user &&
