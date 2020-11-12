@@ -12,10 +12,6 @@ import HomeWorkIcon from '@material-ui/icons/HomeWork';
 
 const Dashboard = () => {
 
-	useEffect(()=>{
-		Aos.init({duration: 800, offset: 10});
-	},[]);
-
 	const { user, isAuthenticated, loading, properties } = useSelector((state) => ({
 		isAuthenticated: state.auth.isAuthenticated,
 		user: state.auth.user,
@@ -25,6 +21,7 @@ const Dashboard = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
 		if(!loading) dispatch(loadAllProperties());
+		Aos.init({duration: 800, offset: 10});
 	}, [loading]);
 	
 	return (
