@@ -31,7 +31,7 @@ function PropertyItem({name}) {
   const classes = useStyles();
 
   return (
-      <Link className={classes.link} to="/">
+      <Link className={classes.link} to="/property">
         <Card className={classes.root} style={{boxShadow: " 0 30px 50px -14px rgba(0,0,0,0.25)"}}>
         <CardActionArea to="/">
             <CardMedia  

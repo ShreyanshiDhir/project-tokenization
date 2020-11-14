@@ -11,6 +11,8 @@ import setAuthToken from "./utils/setAuthToken";
 import { loadUser } from "./store/auth";
 import { useDispatch } from "react-redux";
 import  NewToken  from "./components/property/NewToken";
+import  Property  from "./components/property/Property";
+
 const App = () => {
 	const dispatch = useDispatch();
 	useEffect(() => {
@@ -35,6 +37,11 @@ const App = () => {
 						exact
 						path='/new-token'
 						component={NewToken}
+					/>
+					<PrivateRoute
+						exact
+						path='/property'
+						component={Property}
 					/>
 				</Switch>
 				<Footer />
