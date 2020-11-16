@@ -30,7 +30,7 @@ export default function SimpleCard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card variant="outline" square elevation={0} className={classes.root} style={{borderRight:"3px solid #e5e5e5"}} >
+    <Card square elevation={0} className={classes.root} style={{borderRight:"3px solid #e5e5e5"}} >
       <CardContent>
         <div style={{display:"flex", justifyContent:"space-between"}}>
           <Typography className={classes.title} color="textSecondary" gutterBottom >

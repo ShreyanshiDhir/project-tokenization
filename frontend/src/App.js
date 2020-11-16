@@ -42,7 +42,7 @@ const App = () => {
 					/>
 					<PrivateRoute
 						exact
-						path='/property'
+						path='/property/:id'
 						component={Property}
 					/>
 				</Switch>

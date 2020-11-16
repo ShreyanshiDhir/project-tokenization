@@ -1,5 +1,6 @@
 import React,{useEffect} from "react";
 import { useSelector,useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { loadAllProperties } from "../../store/property";
 import  PropertyItem  from "../property/PropertyItem";
 import  UserInfo  from "./UserInfo";
@@ -8,10 +9,8 @@ import {Grid, Typography} from '@material-ui/core';
 import Aos from "aos";
 import "aos/dist/aos.css";
 
-import HomeWorkIcon from '@material-ui/icons/HomeWork';
-
 const Dashboard = () => {
-
+	const history = useHistory();
 	const { user, isAuthenticated, loading, properties } = useSelector((state) => ({
 		isAuthenticated: state.auth.isAuthenticated,
 		user: state.auth.user,
@@ -22,7 +21,8 @@ const Dashboard = () => {
 	useEffect(() => {
 		if(!loading) dispatch(loadAllProperties());
 		Aos.init({duration: 800, offset: 10});
-	}, [loading]);
+		if (!isAuthenticated) history.push("/login"); //redirect to login if not authenticated
+	}, [loading,history,isAuthenticated]);
 	
 	return (
 		user &&
@@ -123,7 +123,7 @@ const Dashboard = () => {
 								
 								<Grid
 								data-aos="fade-up"
-								
+								key={p._id}
 									item
 									xs={12}
 									md={4}
@@ -134,7 +134,7 @@ const Dashboard = () => {
 										marginTop: "4rem",
 									}}
 								>
-									<PropertyItem name={p.name} />
+									<PropertyItem  id={p._id} name={p.name} tokenValue={p.tokenValue} initialSupply={p.initialSupply} symbol={p.symbol}/>
 								</Grid>
 								
 							))}

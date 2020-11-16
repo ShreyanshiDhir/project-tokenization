@@ -43,8 +43,9 @@ export const loadAllProperties = () => async (dispatch) => {
 		dispatch(setLoading(false));
 	}
 };
+
 //New ERC20 token contract deployment
-export const newToken = ({name,symbol,initialSupply},web3,history) => async (dispatch) => {
+export const newToken = ({name,description,image,tokenValue,symbol,initialSupply,owner},web3,history) => async (dispatch) => {
 	try {
 		dispatch(setLoading(true));
 		if (!web3) {
@@ -66,9 +67,6 @@ export const newToken = ({name,symbol,initialSupply},web3,history) => async (dis
 			return;
 		}
 
-	// var _name = /* var of type string here */ ;
-	// var _symbol = /* var of type string here */ ;
-	// var _initialSupply = /* var of type uint256 here */ ;
 	var mytokenContract = new web3.eth.Contract([
 		{
 			inputs: [
@@ -451,6 +449,13 @@ export const newToken = ({name,symbol,initialSupply},web3,history) => async (dis
 										contract.options.address,
 										100
 									).send({from : coinbase});
+									const tokenAddress = token;
+									const crowdsaleAddress = contract.options.address;
+									const body = JSON.stringify({ name,description,image, tokenValue,initialSupply,symbol,tokenAddress, crowdsaleAddress,owner});
+									const data = await API.post(
+										"/api/property",
+										body
+									);
 								}
 							}
 						);
@@ -464,3 +469,16 @@ export const newToken = ({name,symbol,initialSupply},web3,history) => async (dis
 		dispatch(setLoading(false));
 	}
 };
+
+export const loadProperty = (id) => async dispatch => {
+	try {
+		dispatch(setLoading(true));
+		const res = await API.get(`/api/property/${id}`);
+		console.log(res);
+		dispatch(setProperty(res.data.property));
+	} catch (err) {
+		console.log(err);
+		dispatch(setLoading(false));
+	}
+
+}

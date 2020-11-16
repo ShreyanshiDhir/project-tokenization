@@ -1,5 +1,5 @@
 import React from "react";
-import {Link} from 'react-router-dom'
+import { Link } from "react-router-dom";
 import { Box, Container, Grid } from "@material-ui/core";
 import { MUItheme } from "../../theme";
 import { ThemeProvider } from "@material-ui/core";
@@ -8,14 +8,14 @@ import { makeStyles } from "@material-ui/core/styles";
 const useStyles = makeStyles({
 	root: {
 		listStyleType: "none",
-		paddingInlineStart : "0",
+		paddingInlineStart: "0",
 		"& a": {
 			color: "white",
-			textDecoration : "none",
+			textDecoration: "none",
 		},
-		"& li" : {
-			textAlign : "left"
-		}
+		"& li": {
+			textAlign: "left",
+		},
 	},
 });
 const Footer = () => {
@@ -26,7 +26,7 @@ const Footer = () => {
 				style={{
 					bottom: "0",
 					backgroundColor: "#22316C",
-					marginTop:"5rem"
+					marginTop: "5rem",
 				}}
 			>
 				<Box display='flex' flexDirection='column'>
@@ -49,58 +49,52 @@ const Footer = () => {
 						</Grid>
 						<Grid item sm={5} md={2}>
 							<h3>Company</h3>
-							<ul
-								className={classes.root}
-							>
+							<ul className={classes.root}>
 								<li>
-									<Link to="/blog">Blog</Link>
+									<Link to='/blog'>Blog</Link>
 								</li>
 								<li>
-									<Link>FAQ</Link>
+									<Link to='/'>FAQ</Link>
 								</li>
 								<li>
-									<Link>Contact</Link>
+									<Link to='/'>Contact</Link>
 								</li>
 							</ul>
 						</Grid>
 						<Grid item sm={5} md={2}>
 							<h3>Resources</h3>
-							<ul
-								className={classes.root}
-							>
+							<ul className={classes.root}>
 								<li>
-									<Link>ConsnSys</Link>
+									<Link to='/'>ConsnSys</Link>
 								</li>
 								<li>
-									<Link>Legal</Link>
+									<Link to='/'>Legal</Link>
 								</li>
 								<li>
-									<Link>Blockchain 101</Link>
+									<Link to='/'>Blockchain 101</Link>
 								</li>
 								<li>
-									<Link>Term Of Use</Link>
+									<Link to='/'>Term Of Use</Link>
 								</li>
 								<li>
-									<Link>Private Policy</Link>
+									<Link to='/'>Private Policy</Link>
 								</li>
 							</ul>
 						</Grid>
 						<Grid item sm={5} md={2}>
 							<h3>Socials</h3>
-							<ul
-								className={classes.root}
-							>
+							<ul className={classes.root}>
 								<li>
-									<Link>LinkedIn</Link>
+									<Link to='/'>LinkedIn</Link>
 								</li>
 								<li>
-									<Link>Twitter</Link>
+									<Link to='/'>Twitter</Link>
 								</li>
 								<li>
-									<Link>Facebook</Link>
+									<Link to='/'>Facebook</Link>
 								</li>
 								<li>
-									<Link>Instagram</Link>
+									<Link to='/'>Instagram</Link>
 								</li>
 							</ul>
 						</Grid>
