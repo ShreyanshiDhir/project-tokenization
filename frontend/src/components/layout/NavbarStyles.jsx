@@ -15,7 +15,8 @@ const navbarStyles = (theme) => ({
 		textDecoration: "none",
 	},
 	titleText: {
-        fontWeight: "bold",
+		fontWeight: "bold",
+		fontSize:"1.3rem",
         color:"white"
 	},
 	//desktop links and link text
@@ -42,7 +43,7 @@ const navbarStyles = (theme) => ({
 		},
 		"&:hover:before": {
 			transform: "scaleX(1)",
-			transition: "transform 300ms ease-in-out",
+			transition: "transform 350ms ease-in-out",
 		},
 	},
 	//activeLink
@@ -61,7 +62,7 @@ const navbarStyles = (theme) => ({
 	},
 	navLinkText: {
 		fontFamily: theme.typography.fontFamily,
-		fontSize: "1rem",
+		fontSize: "1.2rem",
 	},
 
 	//responsive behavior
