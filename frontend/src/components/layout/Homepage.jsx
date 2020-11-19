@@ -109,6 +109,28 @@ const Homepage = props => {
 					</Typography>
 				</section>
 			</section>
+
+			<section>
+				<Grid
+					container
+					style={{
+						width: "80%",
+						margin: "0 auto",
+						border: "3px solid red",
+					}}
+				>
+					<Grid item xs={12} md={4}>
+						card 1
+					</Grid>
+					<Grid item xs={12} md={4}>
+						card 2
+					</Grid>
+					<Grid item xs={12} md={4}>
+						card 3
+					</Grid>
+				</Grid>
+			</section>
+
 			<section style={{ backgroundColor: "white" }}>
 				<Grid
 					container

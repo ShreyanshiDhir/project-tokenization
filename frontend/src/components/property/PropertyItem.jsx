@@ -13,10 +13,10 @@ const useStyles = makeStyles({
 	root: {
 		maxWidth: 345,
 		"&:hover": {
-			transform: "scale(1.03)",
+			transform: "scale(1.02)",
 			transitionTimingFunction: "ease",
 		},
-		transition: "0.3s",
+		transition: "0.5s",
 	},
 	link: {
 		textDecoration: "none",

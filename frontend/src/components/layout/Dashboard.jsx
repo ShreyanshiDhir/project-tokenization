@@ -68,36 +68,37 @@ const Dashboard = () => {
 				>
 					<div
 						style={{
-							backgroundColor: "#ffffff",
+							backgroundColor: "white",
 							width: "90%",
 							height: "4.3rem",
-							display:"flex",
+							display: "flex",
 							paddingTop: "1rem",
 						}}
 					>
 						<Grid container>
-							<Grid item xs={12} md={6}>
-								<Typography
-									variant="h4"
-									style={{ marginLeft: "7rem" }}
-								>
-									Available Investments
+							<Grid
+								item
+								xs={12}
+								md={12}
+								style={{ textAlign: "center" }}
+							>
+								<Typography variant="h4">
+									AVAILABLE​  INVESTMENTS
 								</Typography>
 
 								<hr
 									style={{
 										height: "4px",
 										color: "#00cccc",
-										marginLeft: "7rem",
+
 										backgroundColor: "#00cccc",
-										width: "25%",
+										width: "100%",
 										borderRadius: "20px",
 										border: "none",
 										marginBottom: "0",
 									}}
 								/>
 							</Grid>
-							
 						</Grid>
 					</div>
 				</div>
@@ -120,10 +121,9 @@ const Dashboard = () => {
 					>
 						<Grid container style={{ width: "88%" }}>
 							{properties.map((p) => (
-								
 								<Grid
-								data-aos="fade-up"
-								key={p._id}
+									data-aos="fade-up"
+									key={p._id}
 									item
 									xs={12}
 									md={4}
@@ -134,9 +134,14 @@ const Dashboard = () => {
 										marginTop: "4rem",
 									}}
 								>
-									<PropertyItem  id={p._id} name={p.name} tokenValue={p.tokenValue} initialSupply={p.initialSupply} symbol={p.symbol}/>
+									<PropertyItem
+										id={p._id}
+										name={p.name}
+										tokenValue={p.tokenValue}
+										initialSupply={p.initialSupply}
+										symbol={p.symbol}
+									/>
 								</Grid>
-								
 							))}
 						</Grid>
 					</div>

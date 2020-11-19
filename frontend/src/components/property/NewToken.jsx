@@ -26,9 +26,9 @@ let web3;
 const NewToken = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	const { owner } = useSelector(
-		(state) => ({ owner: state.auth.user._id })
-	);
+	// const { owner } = useSelector(
+	// 	(state) => ({ owner: state.auth.user._id })
+	// );
 	const [values, setValues] = useState(initialValues);
 	const handleInputChange = (e) => {
 		setValues({
@@ -39,7 +39,7 @@ const NewToken = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		dispatch(newToken({...values,owner}, web3, history));
+		// dispatch(newToken({...values,owner}, web3, history));
 	};
 
 	return (
@@ -75,7 +75,7 @@ const NewToken = () => {
 					>
 						<ThemeProvider>
 							<Grid container spacing={3}>
-								<Grid item xs={12} sm={6}>
+								{/* <Grid item xs={12} sm={6}>
 									<img
 										src={tokenization}
 										style={{
@@ -87,11 +87,11 @@ const NewToken = () => {
 											marginTop: "1rem",
 										}}
 									/>
-								</Grid>
+								</Grid> */}
 
-								<Grid item xs={12} sm={6}>
+								<Grid item xs={12} sm={12}>
 									<div style={{ width: "80%" }}>
-										<h1 mt='1rem'>
+										<h1 mt="1rem">
 											<span
 												style={{
 													color: "#003F87",
@@ -104,10 +104,10 @@ const NewToken = () => {
 										</h1>
 
 										<TextField
-											label='Name'
-											size='small'
-											variant='outlined'
-											name='name'
+											label="Property Name"
+											size="small"
+											variant="outlined"
+											name="name"
 											onChange={handleInputChange}
 											value={values.name}
 											style={{
@@ -120,10 +120,28 @@ const NewToken = () => {
 										/>
 
 										<TextField
-											label='Description'
-											variant='outlined'
-											size='small'
-											name='description'
+											label="Address"
+											size="small"
+											variant="outlined"
+											name="address"
+											onChange={handleInputChange}
+											value={values.address}
+											style={{
+												marginBottom: "1.2rem",
+												marginTop: "0.4rem",
+												backgroundColor: "white",
+												borderRadius: "5px",
+												width: "100%",
+											}}
+										/>
+
+										<TextField
+											label="Description"
+											multiline
+											rows={4}
+											variant="outlined"
+											size="small"
+											name="description"
 											onChange={handleInputChange}
 											value={values.description}
 											style={{
@@ -135,10 +153,10 @@ const NewToken = () => {
 										/>
 
 										<TextField
-											label='Image Url'
-											variant='outlined'
-											size='small'
-											name='image'
+											label="Image Url"
+											variant="outlined"
+											size="small"
+											name="image"
 											onChange={handleInputChange}
 											value={values.image}
 											style={{
@@ -152,10 +170,10 @@ const NewToken = () => {
 										<Grid container spacing={2}>
 											<Grid item xs={12} sm={4}>
 												<TextField
-													label='Token Value'
-													variant='outlined'
-													size='small'
-													name='tokenValue'
+													label="Token Value"
+													variant="outlined"
+													size="small"
+													name="tokenValue"
 													onChange={handleInputChange}
 													value={values.tokenValue}
 													style={{
@@ -169,10 +187,10 @@ const NewToken = () => {
 											</Grid>
 											<Grid item xs={12} sm={4}>
 												<TextField
-													label='Total Tokens'
-													variant='outlined'
-													size='small'
-													name='initialSupply'
+													label="Total Tokens"
+													variant="outlined"
+													size="small"
+													name="initialSupply"
 													onChange={handleInputChange}
 													value={values.initialSupply}
 													style={{
@@ -186,10 +204,10 @@ const NewToken = () => {
 											</Grid>
 											<Grid item xs={12} sm={4}>
 												<TextField
-													label='Token Symbol'
-													variant='outlined'
-													size='small'
-													name='symbol'
+													label="Token Symbol"
+													variant="outlined"
+													size="small"
+													name="symbol"
 													onChange={handleInputChange}
 													value={values.symbol}
 													style={{
@@ -214,8 +232,8 @@ const NewToken = () => {
 											>
 												<Grid item xs={12} md={12}>
 													<Button
-														type='submit'
-														varient='outlined'
+														type="submit"
+														varient="outlined"
 														style={{
 															backgroundColor:
 																"#00cccc",

@@ -30,23 +30,52 @@ export default function SimpleCard() {
   const bull = <span className={classes.bullet}>•</span>;
 
   return (
-    <Card square elevation={0} className={classes.root} style={{borderRight:"3px solid #e5e5e5"}} >
-      <CardContent>
-        <div style={{display:"flex", justifyContent:"space-between"}}>
-          <Typography className={classes.title} color="textSecondary" gutterBottom >
-          Total Tokens
-        </Typography>
-        <AccountBalanceIcon color="primary"/>
-        </div>
-        
-        <Typography variant="h2" component="h2" color="primary" align="center" style={{fontWeight:"400", marginTop:"1rem"}}>
-          1200
-        </Typography> 
-      </CardContent>
-      <CardActions>
-        <Button style={{marginLeft:"25%", opacity:"0.7", fontSize:"11px", }} size="small">Learn More About this</Button>
-      </CardActions>
-    </Card>
+		<Card
+			square
+			elevation={0}
+			className={classes.root}
+			style={{
+				borderRight: "3px solid #e5e5e5",
+				backgroundColor: "white",
+			}}
+		>
+			<CardContent>
+				<div
+					style={{ display: "flex", justifyContent: "space-between" }}
+				>
+					<Typography
+						className={classes.title}
+						color="textSecondary"
+						gutterBottom
+					>
+						Total Tokens
+					</Typography>
+					<AccountBalanceIcon color="primary" />
+				</div>
+
+				<Typography
+					variant="h2"
+					component="h2"
+					color="primary"
+					align="center"
+					style={{ fontWeight: "400", marginTop: "1rem" }}
+				>
+					1200
+				</Typography>
+			</CardContent>
+			<CardActions>
+				<Button
+					style={{
+						marginLeft: "25%",
+						opacity: "0.7",
+						fontSize: "11px",
+					}}
+					size="small"
+				>
+					Learn More About this
+				</Button>
+			</CardActions>
+		</Card>
   );
 }
 
