@@ -1,12 +1,12 @@
 import React, {useState, useEffect } from "react";
+import { MUItheme } from "../../theme";
 import { Grid, ThemeProvider, Paper, Link } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles,MuiThemeProvider } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
-import { MUItheme } from "../../theme";
 import { useHistory } from "react-router-dom";
 import house from "../../assets/images/house.jpg";
 import { useSelector, useDispatch,shallowEqual } from "react-redux";
@@ -48,8 +48,9 @@ const Property = ({ match }) => {
 	}, [match.params.id,isAuthenticated]);
 	// const {name,description,image,tokenValue,intialSupply,_id} = property;
 	return (
-		!loading && property &&  (
-			<ThemeProvider theme={MUItheme}>
+		!loading &&
+		property && (
+			<MuiThemeProvider theme={MUItheme}>
 				<div>
 					<Grid
 						container
@@ -134,7 +135,7 @@ const Property = ({ match }) => {
 										id='filled-basic'
 										variant='filled'
 										size='small'
-										name="price"
+										name='price'
 										onChange={handleInputChange}
 										value={values.price}
 										label='Number of Tokens'
@@ -169,7 +170,9 @@ const Property = ({ match }) => {
 													textAlign: "center",
 												}}
 											>
-												{values.price * property.tokenValue.$numberDecimal}
+												{values.price *
+													property.tokenValue
+														.$numberDecimal}
 											</Typography>
 										</Grid>
 									</Grid>
@@ -178,6 +181,7 @@ const Property = ({ match }) => {
 										variant='contained'
 										color='secondary'
 										style={{
+											backgroundColor: "#00cccc",
 											color: "white",
 											width: "91%",
 											fontSize: "1rem",
@@ -292,38 +296,13 @@ const Property = ({ match }) => {
 											</Typography> */}
 										</Grid>
 									</Grid>
-									{ property.description || `Lorem ipsum dolor sit amet, consectetur
-									adipiscing elit, sed do eiusmod tempor
-									incididunt ut labore et dolore magna aliqua.
-									Aenean sed adipiscing diam donec adipiscing
-									tristique risus nec. Faucibus nisl tincidunt
-									eget nullam non nisi est sit amet. Sed odio
-									morbi quis commodo odio aenean sed. Aliquet
-									eget sit amet tellus cras adipiscing. Massa
-									ultricies mi quis hendrerit dolor magna
-									eget. Id aliquet risus feugiat in ante metus
-									dictum. Malesuada pellentesque elit eget
-									gravida cum sociis natoque penatibus et.
-									Viverra suspendisse potenti nullam ac tortor
-									vitae. Consequat mauris nunc congue nisi
-									vitae suscipit. Porta lorem mollis aliquam
-									ut porttitor leo. Nec dui nunc mattis enim
-									ut tellus. Enim nunc faucibus a pellentesque
-									sit amet. Nisi est sit amet facilisis magna.
-									Egestas erat imperdiet sed euismod nisi
-									porta lorem mollis aliquam. Sociis natoque
-									penatibus et magnis dis parturient. Eu
-									feugiat pretium nibh ipsum consequat nisl
-									vel. Lectus mauris ultrices eros in cursus
-									turpis massa tincidunt dui. Pharetra magna
-									ac placerat vestibulum lectus mauris
-									ultrices.`}
+									{property.description}
 								</Paper>
 							</div>
 						</Grid>
 					</Grid>
 				</div>
-			</ThemeProvider>
+			</MuiThemeProvider>
 		)
 	);
 };

@@ -31,8 +31,9 @@ const Homepage = props => {
 								className="btn"
 								variant="contained"
 								size="large"
-								color="secondary"
+								// color="secondary"
 								style={{
+									backgroundColor: "#00cccc",
 									color: "white",
 									marginTop: "4REM",
 									marginLeft: "25rem",
@@ -47,8 +48,9 @@ const Homepage = props => {
 								className="btn"
 								variant="contained"
 								size="large"
-								color="secondary"
+								// color="secondary"
 								style={{
+									backgroundColor: "#00cccc",
 									color: "white",
 									marginTop: "4REM",
 									marginRight: "25rem",
