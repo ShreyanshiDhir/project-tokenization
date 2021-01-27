@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+
+import Loader from "../layout/Loader";
+
 import PropTypes from "prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser } from "../../store/auth";
@@ -16,11 +19,10 @@ import Web3 from "web3";
 const initialValues = {
 	name: "",
 	description: "",
-	image : "",
-	tokenValue : "",
-	initialSupply : "",
-	symbol : ""
-
+	image: "",
+	tokenValue: "",
+	initialSupply: "",
+	symbol: "",
 };
 let web3;
 const NewToken = () => {
@@ -260,6 +262,10 @@ const NewToken = () => {
 				</form>
 			}
 		</div>
+
+		// <div>
+		// 	<Loader/>
+		// </div>
 	);
 };
 
