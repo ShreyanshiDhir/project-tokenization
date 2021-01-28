@@ -67,7 +67,7 @@ const Property = ({ match }) => {
 								<CardContent
 									style={{
 										textAlign: "left",
-										marginLeft: "1rem",
+										marginLeft: "1.6rem",
 									}}
 								>
 									<Typography
@@ -116,7 +116,7 @@ const Property = ({ match }) => {
 												backgroundColor: "#e0e0e0",
 												color: "#e0e0e0",
 												border: "none",
-												width: "94%",
+												width: "90%",
 												marginLeft: "0",
 											}}
 										/>
@@ -176,6 +176,15 @@ const Property = ({ match }) => {
 												{values.price *
 													property.tokenValue
 														.$numberDecimal}
+												{"  "}
+												<span
+													style={{
+														fontSize: "0.9rem",
+														color: "",
+													}}
+												>
+													ETH
+												</span>
 											</Typography>
 										</Grid>
 									</Grid>
