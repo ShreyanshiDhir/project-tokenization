@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { loadAllProperties } from "../../store/property";
 import PropertyItem from "../property/PropertyItem";
 import UserInfo from "./UserInfo";
@@ -100,10 +100,10 @@ const Dashboard = () => {
 										md={3}
 									>
 										<Typography variant="h5">
-											Pranav Garg
+											{user.name}
 										</Typography>
 										<Typography variant="h7">
-											asdfghjkllmnbvcxz@gmail.com
+											{user.email}
 										</Typography>
 									</Grid>
 									<Grid item xs={12} md={8}>
@@ -122,8 +122,9 @@ const Dashboard = () => {
 												}}
 											/>
 										</Typography>
-
-										<Button
+												{user.tokens.map((t)=> (<Button
+												component={Link}
+												to={`/property${t.id}`}
 											variant="contained"
 											color="secondary"
 											style={{
@@ -136,53 +137,8 @@ const Dashboard = () => {
 												borderRadius: "3px",
 											}}
 										>
-											ABC
-										</Button>
-										<Button
-											variant="contained"
-											color="secondary"
-											style={{
-												backgroundColor: "#00cccc",
-												color: "white",
-												marginRight: "1rem",
-												fontSize: "1rem",
-												marginTop: "1rem",
-												marginBottom: "1rem",
-												borderRadius: "3px",
-											}}
-										>
-											XYZ
-										</Button>
-										<Button
-											variant="contained"
-											color="secondary"
-											style={{
-												backgroundColor: "#00cccc",
-												color: "white",
-												marginRight: "1rem",
-												fontSize: "1rem",
-												marginTop: "1rem",
-												marginBottom: "1rem",
-												borderRadius: "3px",
-											}}
-										>
-											SHR
-										</Button>
-										<Button
-											variant="contained"
-											color="secondary"
-											style={{
-												backgroundColor: "#00cccc",
-												color: "white",
-												marginRight: "1rem",
-												fontSize: "1rem",
-												marginTop: "1rem",
-												marginBottom: "1rem",
-												borderRadius: "3px",
-											}}
-										>
-											DHR
-										</Button>
+											{t.symbol}
+										</Button>))}
 									</Grid>
 								</Grid>
 							</div>

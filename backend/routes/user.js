@@ -1,9 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const config = require("config");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-const { body, validationResult } = require("express-validator");
+const auth = require("../middleware/auth");
 //User Model
 const User = require("../models/User");
 //@route	GET api/user
@@ -51,6 +48,21 @@ router.post("/", async (req, res) => {
 	} catch (err) {
 		console.log(err.message);
 		res.status(400).send("server error");
+	}
+});
+
+//@route	PUT api/user
+//@desc		Add a new token in user's portfolio
+//@access	PRIVATE
+router.put("/",auth, async (req, res) => {
+	try {
+		const user = await User.findById(req.user.id);
+		user.tokens.push(req.body);
+		user.save();
+		res.json({user});
+	} catch (err) {
+		console.log(err.message);
+		res.status(400).send("Server error");
 	}
 });
 

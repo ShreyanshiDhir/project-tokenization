@@ -725,9 +725,15 @@ export const buyTokens = (property,price,user,web3) => async (dispatch) => {
 		mycrowdsaleContract.methods
 			.buyTokens(coinbase) //for the current metamask account
 			.send({ from: coinbase, value: web3.utils.toWei(val.toString()) })//from the current metamask account
-			.then(function(receipt){
+			.then(async function(receipt){
 				console.log(receipt);
-				dispatch(setLoading(false)); 
+				const body = JSON.stringify({ symbol : property.symbol, id : property._id });
+				const res = await API.put("/api/user",body);
+				if(res.data)
+				{
+					console.log("user token added")
+					dispatch(setLoading(false)); 
+				}
 			});
 	} catch (err) {
 		// const errors = err.response.data.error;
