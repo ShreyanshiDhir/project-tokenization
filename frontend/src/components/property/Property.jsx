@@ -7,10 +7,11 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
+import LoadingOverlay from "react-loading-overlay";
 import { useHistory } from "react-router-dom";
 import house from "../../assets/images/house.jpg";
 import { useSelector, useDispatch, shallowEqual } from "react-redux";
-import { loadProperty } from "../../store/property";
+import { loadProperty, buyTokens } from "../../store/property";
 const useStyles = makeStyles({
 	root: {
 		minWidth: 275,
@@ -27,6 +28,7 @@ const useStyles = makeStyles({
 const initialValues = {
 	price: "",
 };
+let web3;
 const Property = ({ match }) => {
 	const classes = useStyles();
 	const history = useHistory();
@@ -37,9 +39,10 @@ const Property = ({ match }) => {
 			[e.target.name]: e.target.value,
 		});
 	};
-	const { isAuthenticated, loading, property } = useSelector(
+	const { isAuthenticated, user, loading, property } = useSelector(
 		(state) => ({
 			isAuthenticated: state.auth.isAuthenticated,
+			user: state.auth.user,
 			loading: state.property.loading,
 			property: state.property.property,
 		}),
@@ -50,253 +53,268 @@ const Property = ({ match }) => {
 		if (isAuthenticated) dispatch(loadProperty(match.params.id));
 	}, [match.params.id, isAuthenticated]);
 	// const {name,description,image,tokenValue,intialSupply,_id} = property;
+	const handleBuy = (e) => {
+		console.log(values.price);
+		dispatch(buyTokens(property, values.price, user, web3));
+	};
 	return (
-		!loading &&
 		property && (
-			<MuiThemeProvider theme={MUItheme}>
-				<div>
-					<Grid
-						container
-						style={{ width: "90%", margin: "2.5rem auto" }}
-					>
-						<Grid item xs={12} md={4}>
-							<Card
-								className={classes.root}
-								style={{ width: "88%" }}
-							>
-								<CardContent
-									style={{
-										textAlign: "left",
-										marginLeft: "1.6rem",
-									}}
+			<LoadingOverlay
+				active={loading}
+				spinner
+				text='Waiting For Transaction Confirmation...'
+			>
+				<MuiThemeProvider theme={MUItheme}>
+					<div>
+						<Grid
+							container
+							style={{ width: "90%", margin: "2.5rem auto" }}
+						>
+							<Grid item xs={12} md={4}>
+								<Card
+									className={classes.root}
+									style={{ width: "88%" }}
 								>
-									<Typography
-										className={classes.title}
-										variant="h6"
-										gutterBottom
-									>
-										Price
-									</Typography>
-									<hr
+									<CardContent
 										style={{
-											height: "3px",
-											backgroundColor: "#00cccc",
-											color: "#00cccc",
-											border: "none",
-											width: "30%",
-											marginLeft: "0",
+											textAlign: "left",
+											marginLeft: "1.6rem",
 										}}
-									/>
-									<div style={{ display: "flex" }}>
-										<Typography variant="h3" component="h2">
-											{property.tokenValue.$numberDecimal}
-										</Typography>
-
-										<Typography
-											style={{
-												marginTop: "1.2rem",
-												fontWeight: "bold",
-											}}
-											variant="h5"
-										>
-											{" "}
-											‏‏‎ ‎‎ETH
-										</Typography>
-									</div>
-									<Typography
-										className={classes.pos}
-										color="textSecondary"
 									>
-										Per Token
-									</Typography>
-									<Typography variant="h6">
+										<Typography
+											className={classes.title}
+											variant='h6'
+											gutterBottom
+										>
+											Price
+										</Typography>
 										<hr
 											style={{
-												height: "2px",
-												backgroundColor: "#e0e0e0",
-												color: "#e0e0e0",
+												height: "3px",
+												backgroundColor: "#00cccc",
+												color: "#00cccc",
 												border: "none",
-												width: "90%",
+												width: "30%",
 												marginLeft: "0",
 											}}
 										/>
-										Buy Tokens
-									</Typography>
-
-									<hr
-										style={{
-											height: "3.2px",
-											backgroundColor: "#00cccc",
-											color: "#00cccc",
-											border: "none",
-											width: "38%",
-											marginLeft: "0",
-										}}
-									/>
-
-									<TextField
-										id="filled-basic"
-										variant="filled"
-										size="small"
-										name="price"
-										onChange={handleInputChange}
-										value={values.price}
-										label="Number of Tokens"
-										color="secondary"
-										style={{
-											marginTop: "1rem",
-											width: "90%",
-										}}
-									/>
-
-									<Grid
-										container
-										style={{ marginTop: "1rem" }}
-									>
-										<Grid item xs={12} md={6}>
+										<div style={{ display: "flex" }}>
 											<Typography
-												color="textSecondary"
-												variant="body1"
-												style={{
-													marginTop: "7px",
-													marginLeft: "4px",
-												}}
+												variant='h3'
+												component='h2'
 											>
-												Total:
-											</Typography>
-										</Grid>
-										<Grid item xs={12} md={6}>
-											<Typography
-												variant="h6"
-												style={{
-													width: "100%",
-													textAlign: "center",
-												}}
-											>
-												{values.price *
+												{
 													property.tokenValue
-														.$numberDecimal}
-												{"  "}
-												<span
+														.$numberDecimal
+												}
+											</Typography>
+
+											<Typography
+												style={{
+													marginTop: "1.2rem",
+													fontWeight: "bold",
+												}}
+												variant='h5'
+											>
+												{" "}
+												‏‏‎ ‎‎ETH
+											</Typography>
+										</div>
+										<Typography
+											className={classes.pos}
+											color='textSecondary'
+										>
+											Per Token
+										</Typography>
+										<Typography variant='h6'>
+											<hr
+												style={{
+													height: "2px",
+													backgroundColor: "#e0e0e0",
+													color: "#e0e0e0",
+													border: "none",
+													width: "90%",
+													marginLeft: "0",
+												}}
+											/>
+											Buy Tokens
+										</Typography>
+
+										<hr
+											style={{
+												height: "3.2px",
+												backgroundColor: "#00cccc",
+												color: "#00cccc",
+												border: "none",
+												width: "38%",
+												marginLeft: "0",
+											}}
+										/>
+
+										<TextField
+											id='filled-basic'
+											variant='filled'
+											size='small'
+											name='price'
+											onChange={handleInputChange}
+											value={values.price}
+											label='Number of Tokens'
+											color='secondary'
+											style={{
+												marginTop: "1rem",
+												width: "90%",
+											}}
+										/>
+
+										<Grid
+											container
+											style={{ marginTop: "1rem" }}
+										>
+											<Grid item xs={12} md={6}>
+												<Typography
+													color='textSecondary'
+													variant='body1'
 													style={{
-														fontSize: "0.9rem",
-														color: "",
+														marginTop: "7px",
+														marginLeft: "4px",
 													}}
 												>
-													ETH
-												</span>
-											</Typography>
+													Total:
+												</Typography>
+											</Grid>
+											<Grid item xs={12} md={6}>
+												<Typography
+													variant='h6'
+													style={{
+														width: "100%",
+														textAlign: "center",
+													}}
+												>
+													{values.price *
+														property.tokenValue
+															.$numberDecimal}
+													{"  "}
+													<span
+														style={{
+															fontSize: "0.9rem",
+															color: "",
+														}}
+													>
+														ETH
+													</span>
+												</Typography>
+											</Grid>
 										</Grid>
-									</Grid>
 
-									<Button
-										variant="contained"
-										color="secondary"
-										style={{
-											backgroundColor: "#00cccc",
-											color: "white",
-											width: "91%",
-											fontSize: "1rem",
-											marginTop: "1rem",
-											marginBottom: "1rem",
-											borderRadius: "3px",
-										}}
-									>
-										BUY
-									</Button>
-								</CardContent>
-							</Card>
-						</Grid>
-						<Grid
-							item
-							xs={12}
-							md={8}
-							style={{
-								height: "50rem",
-								width: "80%",
-							}}
-						>
-							<div
+										<Button
+											variant='contained'
+											color='secondary'
+											style={{
+												backgroundColor: "#00cccc",
+												color: "white",
+												width: "91%",
+												fontSize: "1rem",
+												marginTop: "1rem",
+												marginBottom: "1rem",
+												borderRadius: "3px",
+											}}
+											onClick={handleBuy}
+										>
+											BUY
+										</Button>
+									</CardContent>
+								</Card>
+							</Grid>
+							<Grid
+								item
+								xs={12}
+								md={8}
 								style={{
-									height: "50%",
-									backgroundImage: `url(${house})`,
-									backgroundSize: "cover",
-									backgroundRepeat: "no-repeat",
-									backgroundPosition: "center",
+									height: "50rem",
+									width: "80%",
 								}}
-							></div>
-							<div style={{ height: "9%", display: "flex" }}>
-								<Paper
-									square="true"
-									elevation={0}
+							>
+								<div
 									style={{
-										width: "100%",
-										height: "86%",
-										marginTop: "0.3rem",
-										padding: "0.8rem 1rem",
+										height: "50%",
+										backgroundImage: `url(${house})`,
+										backgroundSize: "cover",
+										backgroundRepeat: "no-repeat",
+										backgroundPosition: "center",
 									}}
-								>
-									<span
+								></div>
+								<div style={{ height: "9%", display: "flex" }}>
+									<Paper
+										square='true'
+										elevation={0}
 										style={{
-											backgroundColor: "green",
-											borderRadius: "3px",
-											color: "white",
-											padding: "0.5rem 0.7rem",
-											marginLeft: "0.6rem",
+											width: "100%",
+											height: "86%",
+											marginTop: "0.3rem",
+											padding: "0.8rem 1rem",
 										}}
 									>
-										AVAILABLE
-									</span>
-									<span>
-										<Button
+										<span
 											style={{
-												color: "#00cccc",
-												fontWeight: "bold",
-												marginLeft: "2rem",
+												backgroundColor: "green",
+												borderRadius: "3px",
+												color: "white",
+												padding: "0.5rem 0.7rem",
+												marginLeft: "0.6rem",
 											}}
 										>
-											VIEW ON ETHER SCAN
-										</Button>
-									</span>
-									<span>
-										<Button
-											style={{
-												color: "#00cccc",
-												fontWeight: "bold",
-												marginLeft: "2rem",
-											}}
-										>
-											COPY LINK
-										</Button>
-									</span>
-								</Paper>
-							</div>
-							<div style={{ height: "41%" }}>
-								<Paper
-									square="true"
-									elevation={0}
-									style={{
-										width: "100%",
-										height: "100%",
-										padding: "1rem 2.3rem",
-									}}
-								>
-									<Grid container>
-										<Grid item xs={2}>
-											<img
+											AVAILABLE
+										</span>
+										<span>
+											<Button
 												style={{
-													width: "50%",
-													height: "80%",
-													marginLeft: "1.8rem",
+													color: "#00cccc",
+													fontWeight: "bold",
+													marginLeft: "2rem",
 												}}
-												src="https://www.pinclipart.com/picdir/big/76-769660_corporate-office-properties-building-clipart.png"
-											></img>
-										</Grid>
-										<Grid item xs={10}>
-											<Typography variant="h4">
-												{property.name}
-											</Typography>
-											{/* <Typography
+											>
+												VIEW ON ETHER SCAN
+											</Button>
+										</span>
+										<span>
+											<Button
+												style={{
+													color: "#00cccc",
+													fontWeight: "bold",
+													marginLeft: "2rem",
+												}}
+											>
+												COPY LINK
+											</Button>
+										</span>
+									</Paper>
+								</div>
+								<div style={{ height: "41%" }}>
+									<Paper
+										square='true'
+										elevation={0}
+										style={{
+											width: "100%",
+											height: "100%",
+											padding: "1rem 2.3rem",
+										}}
+									>
+										<Grid container>
+											<Grid item xs={2}>
+												<img
+													style={{
+														width: "50%",
+														height: "80%",
+														marginLeft: "1.8rem",
+													}}
+													src='https://www.pinclipart.com/picdir/big/76-769660_corporate-office-properties-building-clipart.png'
+												></img>
+											</Grid>
+											<Grid item xs={10}>
+												<Typography variant='h4'>
+													{property.name}
+												</Typography>
+												{/* <Typography
 												variant='body1'
 												color='textSecondary'
 											>
@@ -309,15 +327,16 @@ const Property = ({ match }) => {
 											>
 												New York NY
 											</Typography> */}
+											</Grid>
 										</Grid>
-									</Grid>
-									{property.description}
-								</Paper>
-							</div>
+										{property.description}
+									</Paper>
+								</div>
+							</Grid>
 						</Grid>
-					</Grid>
-				</div>
-			</MuiThemeProvider>
+					</div>
+				</MuiThemeProvider>
+			</LoadingOverlay>
 		)
 	);
 };

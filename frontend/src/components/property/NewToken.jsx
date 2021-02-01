@@ -28,9 +28,9 @@ let web3;
 const NewToken = () => {
 	const dispatch = useDispatch();
 	const history = useHistory();
-	// const { owner } = useSelector(
-	// 	(state) => ({ owner: state.auth.user._id })
-	// );
+	const { owner } = useSelector(
+		(state) => ({ owner: state.auth.user._id })
+	);
 	const [values, setValues] = useState(initialValues);
 	const handleInputChange = (e) => {
 		setValues({
@@ -41,7 +41,7 @@ const NewToken = () => {
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
-		// dispatch(newToken({...values,owner}, web3, history));
+		dispatch(newToken({...values,owner}, web3, history));
 	};
 
 	return (
@@ -262,10 +262,6 @@ const NewToken = () => {
 				</form>
 			}
 		</div>
-
-		// <div>
-		// 	<Loader/>
-		// </div>
 	);
 };
 

@@ -2,3 +2,4 @@ node_modules/
 backend/config/default.json
 .vscode
 debug.log
+*.abi
