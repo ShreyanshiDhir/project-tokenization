@@ -41,17 +41,17 @@ const Footer = () => {
 						}}
 					>
 						<Grid item sm={5} md={2}>
-							<h3>Logo</h3>
-							<img
+							<div style={{alignItems:"center"}}><h1>RealT</h1></div>
+							{/* <img
 								style={{ height: "7rem", width: "5rem" }}
 								src={logo}
-							/>
+							/> */}
 						</Grid>
 						<Grid item sm={5} md={2}>
 							<h3>Company</h3>
 							<ul className={classes.root}>
 								<li>
-									<Link to='/blog'>Blog</Link>
+									<Link to='/'>Blog</Link>
 								</li>
 								<li>
 									<Link to='/'>FAQ</Link>

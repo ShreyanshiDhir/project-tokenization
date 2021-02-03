@@ -61,7 +61,7 @@ const Navbar = (props) => {
 											<Typography
 												className={classes.titleText}
 											>
-												BLAH
+												RealT
 											</Typography>
 										</Link>
 									</div>

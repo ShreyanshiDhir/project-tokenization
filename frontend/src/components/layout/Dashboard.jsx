@@ -218,6 +218,7 @@ const Dashboard = () => {
 											textAlign: "center",
 											justifyContent: "center",
 											marginTop: "4rem",
+											marginBottom: "4rem"
 										}}
 									>
 										<PropertyItem
@@ -226,6 +227,7 @@ const Dashboard = () => {
 											tokenValue={p.tokenValue}
 											initialSupply={p.initialSupply}
 											symbol={p.symbol}
+											image={p.image}
 										/>
 									</Grid>
 								))}

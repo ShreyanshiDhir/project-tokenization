@@ -9,12 +9,12 @@ import { newToken } from "../../store/property";
 import { useHistory } from "react-router-dom";
 import Grid from "@material-ui/core/Grid";
 import { MUItheme } from "../../theme";
-import { TextField, Box, Paper, ThemeProvider } from "@material-ui/core";
+import { TextField, Box, Paper, ThemeProvider, Typography } from "@material-ui/core";
 import Button from "@material-ui/core/Button";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import tokenization from "../../assets/images/tokeniztion.png";
 import bg from "../../assets/images/img_joinus-1.png";
-
+import { loadUser } from "../../store/auth";
 import Web3 from "web3";
 const initialValues = {
 	name: "",
@@ -172,7 +172,7 @@ const NewToken = () => {
 										<Grid container spacing={2}>
 											<Grid item xs={12} sm={4}>
 												<TextField
-													label="Token Value"
+													label="Token Value (in ETH)"
 													variant="outlined"
 													size="small"
 													name="tokenValue"
@@ -251,6 +251,7 @@ const NewToken = () => {
 													>
 														Submit
 													</Button>
+													<Typography variant="body2" style={{color : "red"}}> Warning : This process does 3 transactions on the blockchain which will incur a small amount of fees.</Typography>
 												</Grid>
 											</Grid>
 										</div>

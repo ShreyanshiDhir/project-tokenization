@@ -23,7 +23,7 @@ const useStyles = makeStyles({
 	},
 });
 
-function PropertyItem({ id, name, tokenValue, initialSupply, symbol }) {
+function PropertyItem({ id, name, tokenValue, initialSupply, symbol,image }) {
 	const classes = useStyles();
 
 	return (
@@ -37,7 +37,7 @@ function PropertyItem({ id, name, tokenValue, initialSupply, symbol }) {
 						component='img'
 						alt='Property Image'
 						height='224'
-						image='https://cdn.cnn.com/cnnnext/dam/assets/200211140555-09-dubai-buildings.jpg'
+						image={image || 'https://cdn.cnn.com/cnnnext/dam/assets/200211140555-09-dubai-buildings.jpg' }
 						title='Property Image'
 					/>
 					<CardContent>

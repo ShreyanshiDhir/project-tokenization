@@ -237,7 +237,7 @@ const Property = ({ match }) => {
 								<div
 									style={{
 										height: "50%",
-										backgroundImage: `url(${house})`,
+										backgroundImage: `url(${property.image || house})`,
 										backgroundSize: "cover",
 										backgroundRepeat: "no-repeat",
 										backgroundPosition: "center",
