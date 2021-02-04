@@ -52,14 +52,14 @@ input[type="submit"] {
 	margin-top: 0.5rem;
 	cursor: pointer;
 	
-	width: 31%;
+	width: 35%;
 	outline: none;
 	padding: 12px 15px;
 	color: #fff;
 	border: none;
 	border-radius: 6px;
 
-	font-size: 19px;
+	font-size: 25px;
 	transition: 0.4s;
 	font-weight: bold;
 
